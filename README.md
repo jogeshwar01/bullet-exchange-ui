@@ -1,24 +1,25 @@
-# Vest Exchange
+# Bullet Exchange
 
-Vest Exchange is a highly capital-efficient perpetual futures exchange that employs zero-knowledge proofs to ensure fair pricing for traders and liquidity providers.
+Bullet is a next-generation blockchain that aims to redefine the user experience of decentralized applications and on-chain trading.
+Bullet leverages the state of the art when it comes to blockchain design and zero-knowledge cryptography to enable highly performant yet verifiable applications.
 
-This repository is a frontend clone of the [Vest Exchange](https://trade.vest.exchange/) platform, designed to replicate its user interface and functionality. The backend is a proxy to the Vest Exchange backend, while the websocket communication is handled via Vest's WebSocket API.
+This repository is a frontend clone of the [Bullet Exchange](https://app.bullet.xyz/) platform, designed to replicate its user interface and functionality. The backend is a proxy to the Vest Exchange backend, while the websocket communication is handled via Vest's WebSocket API. This
 
-For further details, refer to the [Vest API documentation](https://docs.vest.exchange/getting-started/vest-api#get-klines).
+For further details, refer to the [Vest API documentation](https://docs.vest.exchange/getting-started/vest-api#get-klines) and [Bullet API documentation](https://docs.bullet.xyz/).
 
-> **Note:** This project is for frontend design and learning purposes only. It makes read-only API calls to the Exchange backend, and no actual trading occurs here. The Vest Exchange platform holds the copyright to all associated assets and functionality.
+> **Note:** This project is for frontend design and learning purposes only. It makes read-only API calls to the Exchange backend, and no actual trading occurs here. The Vest Exchange and Bullet Exchange platforms holds the copyright to all associated assets and functionality.
 
 ## User Interface
 
-### Cloned Vest Design
+### Cloned Bullet Design
 
-![Cloned Vest](images/vest.png)
+![Cloned Buller](images/bullet.png)
 
-### Actual Vest Design
+### Actual Bullet Design
 
 Note: Some differences may exist due to the use of paid TradingView charts in the original design.
 
-![Real Vest](images/vest-real.png)
+![Real Bullet](images/bullet-real.png)
 
 ## API
 
@@ -46,12 +47,10 @@ The WebSocket responses are Brotli compressed, and the data is decompressed befo
 
    - A dropdown menu allows users to select different markets.
 
-     ![Vest Dropdown](images/vest-dropdown.png)
+     ![Bullet Dropdown](images/bullet-dropdown.png)
 
-   - Animations for successful trades, including confetti and sound effects upon clicking “Place Order.”
-     ![Vest Confetti](images/vest-confetti.png)
    - Integration with the Solana wallet adapter for the `Connect Wallet` feature.
-     ![Vest Wallet Adapter](images/vest-wallet-adaptor.png)
+     ![Bullet Wallet Adapter](images/bullet-wallet-adaptor.png)
 
    - Time interval switching for the candlestick chart.
 

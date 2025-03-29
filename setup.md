@@ -13,8 +13,8 @@ source ~/.bashrc
 nvm install 22.12.0
 nvm use 22.12.0
 node -v
-git clone https://github.com/jogeshwar01/vest-exchange-ui.git
-cd vest-exchange-ui/
+git clone https://github.com/jogeshwar01/bullet-exchange-ui.git
+cd bullet-exchange-ui/
 rm -rf frontend/
 cd backend/
 npm i -g typescript
