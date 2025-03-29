@@ -15,37 +15,35 @@ function MarketButton() {
 
   return (
     <div>
-      <div className="flex h-full gap-4 border-r border-border pl-8">
+      <div className="flex h-full pl-[12px]">
         <div className="self-center">
           <div className="cursor-pointer"></div>
         </div>
 
         <div className="grid grow">
           <button
-            className="flex items-center justify-between gap-3 pr-8"
+            className="flex items-center justify-between gap-3 pr-8 mr-2"
             onClick={toggleSelect}
           >
             <div className="flex items-center gap-3">
-              <img
-                src="/common/star.svg"
-                alt="Vest"
-                className="h-4 color-white"
-              />
               {marketsWithImages.find((t) => t == ticker?.symbol) && (
                 <img
                   src={`/tokens/${ticker?.symbol
                     ?.split("-")?.[0]
                     ?.toLowerCase()}.png`}
                   alt="token"
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                 />
               )}
-              <span className="text-font text-lg font-bold">
-                {ticker?.symbol?.split("-")?.[0]}-PERP
+              <span className="text-font text-xl w-fit text-nowrap">
+                <span className="text-vestgrey-50 font-semibold">
+                  {ticker?.symbol?.split("-")?.[0]}
+                </span>
+                <span className="text-vestgrey-100">-PERP</span>
               </span>
-              <div className="rounded bg-[#271714] px-2 py-0.5">
+              <div className="rounded border border-border px-1 py-0.5 mr-2">
                 <div className="font-mono text-primary text-md align-middle">
-                  50X
+                  100X
                 </div>
               </div>
             </div>
@@ -56,7 +54,7 @@ function MarketButton() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               strokeWidth="1.5"
-              className={`text-vestgrey-100 transition-transform duration-300 ${
+              className={`text-vestgrey-100 transition-transform duration-300 mx-2 ${
                 isRotated ? "rotate-180" : ""
               }`}
             >

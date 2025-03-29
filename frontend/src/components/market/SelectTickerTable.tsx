@@ -74,8 +74,8 @@ function SelectTickerTable({
                         className="h-4 w-4"
                       />
                       <span className="font-sans">{ticker.symbol}</span>
-                      <div className="rounded bg-[#271714] px-2">
-                        <span className="font-mono text-primary">50X</span>
+                      <div className="rounded border border-border px-1">
+                        <span className="font-mono text-primary">100X</span>
                       </div>
                     </div>
                   </td>

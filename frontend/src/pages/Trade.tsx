@@ -1,6 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import MarketBar from "../components/MarketBar";
 import SwapInterface from "../components/SwapInterface";
 import TradeInterface from "../components/TradeInterface";
 import { Helmet } from "react-helmet";
@@ -50,9 +49,6 @@ export const Trade = () => {
       <main className="h-full">
         <div className="hidden h-full lg:block">
           <div className="flex h-full flex-col">
-            <div className="grid h-[56px] shrink-0 grid-cols-5 border-b border-border bg-background">
-              <MarketBar market={market as string} />
-            </div>
             <div className="flex flex-1">
               <div className="flex flex-1 flex-col">
                 <TradeInterface market={market as string} />

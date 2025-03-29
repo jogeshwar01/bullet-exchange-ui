@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { getTickers } from "../services/api";
 import { TradesContext } from "../state/TradesProvider";
-import LeverageButton from "./market/LeverageButton";
 import MarketButton from "./market/MarketButton";
 import MarketStats from "./market/MarketStats";
 import { WsManager } from "../utils/ws_manager";
@@ -45,13 +44,10 @@ function MarketBar({ market }: { market: string }) {
   }, [market, setTicker, setTickers]);
 
   return (
-    <>
-      <div className="col-span-4 grid grid-cols-[320px_1fr]">
-        <MarketButton />
-        <MarketStats />
-      </div>
-      <LeverageButton />
-    </>
+    <div className="col-span-2 grid grid-cols-[150px_1fr]">
+      <MarketButton />
+      <MarketStats />
+    </div>
   );
 }
 
