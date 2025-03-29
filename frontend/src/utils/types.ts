@@ -16,8 +16,8 @@ export enum Position {
 }
 
 export enum OrderType {
-  MARKET = "MARKET",
-  LIMIT = "LIMIT",
+  BUY = "Buy",
+  SELL = "Sell",
 }
 
 export interface KLine {

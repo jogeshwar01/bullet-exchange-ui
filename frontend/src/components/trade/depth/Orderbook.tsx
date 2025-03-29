@@ -6,7 +6,7 @@ interface OrderBookProps {
 }
 
 export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
-  const { ticker, bids, asks, totalBidSize, totalAskSize } =
+  const { ticker, bids, asks, totalBidSize, totalAskSize, trades } =
     useContext(TradesContext);
 
   const bidsRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +57,7 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
               Price
             </div>
             <div className="font-semibold text-[12px] border-b-2 border-dashed border-blue-900 w-fit">
-              Total (SOL)
+              Total ({ticker?.symbol?.split("-")?.[0]})
             </div>
             <div className="font-semibold text-[12px] text-left border-b-2 border-dashed border-blue-900 w-fit">
               Total ($)
@@ -78,21 +78,25 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
               {asks?.slice(0, 13)?.map((order, index) => {
                 const size = parseFloat(order[1]);
                 cumulativeAskSize += size; // Keep track of cumulative size
+                const totalValue = cumulativeAskSize * parseFloat(order[0]);
 
                 return (
                   <div key={index} className="relative w-full">
                     <div className="w-full h-5 flex items-center relative box-border text-xs leading-7 justify-between font-display mr-0">
                       <div className="flex flex-row mx-2 justify-between font-mono w-full">
-                        <div className="z-10 text-xs leading-6 text-red">
+                        <div className="z-10 text-xs leading-6 text-red min-w-[80px]">
                           {parseFloat(order[0]).toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 ">
-                          {cumulativeAskSize.toFixed(2)}
+                        <div className="z-10 text-xs leading-6 min-w-[80px] text-center">
+                          {cumulativeAskSize.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
                         </div>
-                        <div className="z-10 text-xs leading-6 ">
-                          {(cumulativeAskSize * parseFloat(order[0])).toFixed(
-                            0
-                          )}
+                        <div className="z-10 text-xs leading-6 min-w-[80px] text-right">
+                          {totalValue.toLocaleString(undefined, {
+                            maximumFractionDigits: 0,
+                          })}
                         </div>
                       </div>
                       {/* Cumulative background */}
@@ -115,15 +119,53 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
             </div>
 
             {/* Orderbook Spread */}
-            <div className="relative w-full px-2 inline-flex font-mono justify-center gap-4 items-center py-1 min-h-[26px] bg-vestgrey-800  z-20">
+            <div className="relative w-full px-2 inline-flex font-mono justify-between gap-4 items-center py-1 min-h-[26px] border-y border-border  z-20">
+              <div
+                className={`text-xs flex items-center gap-1 ${
+                  trades?.[1] &&
+                  trades?.[0] &&
+                  parseFloat(trades[0].price) > parseFloat(trades[1].price)
+                    ? "text-green"
+                    : "text-red"
+                }`}
+              >
+                {parseFloat(trades?.[0]?.price || "0").toFixed(4)}
+                {trades?.[1] &&
+                  trades?.[0] &&
+                  (parseFloat(trades[0].price) > parseFloat(trades[1].price) ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3 h-3"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3 h-3"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+                      />
+                    </svg>
+                  ))}
+              </div>
               <div className="font-[300] text-[13px] leading-[16px] ">
-                Spread
-              </div>
-              <div className="text-xs">
-                {spread > 0 ? `${spread.toFixed(4)}` : "-"}
-              </div>
-              <div className="text-xs">
-                {spread > 0 && `${spreadPercentage.toFixed(1)}%`}
+                {spread > 0 && `${spreadPercentage.toFixed(4)}%`} Spread
               </div>
             </div>
 
@@ -140,21 +182,25 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
               {bids?.slice(0, 13)?.map((order, index) => {
                 const size = parseFloat(order[1]);
                 cumulativeBidSize += size; // Keep track of cumulative size
+                const totalValue = cumulativeBidSize * parseFloat(order[0]);
 
                 return (
                   <div key={index} className="relative w-full">
                     <div className="w-full h-5 flex items-center relative box-border text-xs leading-7 justify-between font-display ml-0">
                       <div className="flex flex-row mx-2 justify-between font-mono w-full">
-                        <div className="z-10 text-xs leading-6 text-green">
+                        <div className="z-10 text-xs leading-6 text-green min-w-[80px]">
                           {parseFloat(order[0]).toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 ">
-                          {cumulativeBidSize.toFixed(2)}
+                        <div className="z-10 text-xs leading-6 min-w-[80px] text-center">
+                          {cumulativeBidSize.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
                         </div>
-                        <div className="z-10 text-xs leading-6 ">
-                          {(cumulativeBidSize * parseFloat(order[0])).toFixed(
-                            0
-                          )}
+                        <div className="z-10 text-xs leading-6 min-w-[80px] text-right">
+                          {totalValue.toLocaleString(undefined, {
+                            maximumFractionDigits: 0,
+                          })}
                         </div>
                       </div>
                       {/* Cumulative background */}

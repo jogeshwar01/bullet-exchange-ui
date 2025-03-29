@@ -1,22 +1,19 @@
 import { useState } from "react";
-import { Position, OrderType } from "../utils/types";
-import PositionBar from "./swap/PositionBar";
+import { OrderType } from "../utils/types";
 import OrderTypeBar from "./swap/OrderTypeBar";
 import SwapForm from "./swap/SwapForm";
+import SwapMarket from "./swap/SwapMarket";
 
 const SwapInterface: React.FC<{ market: string }> = ({ market }) => {
-  const [position, setPosition] = useState<Position>(Position.LONG);
-  const [orderType, setOrderType] = useState<OrderType>(OrderType.MARKET);
+  const [orderType, setOrderType] = useState<OrderType>(OrderType.BUY);
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="w-full">
-        <PositionBar position={position} setPosition={setPosition} />
-      </div>
-      <div className="w-full">
+    <div className="flex h-full flex-col border-r border-border">
+      <div className="mx-2">
+        <SwapMarket />
         <OrderTypeBar orderType={orderType} setOrderType={setOrderType} />
+        <SwapForm market={market} />
       </div>
-      <SwapForm market={market} />
     </div>
   );
 };

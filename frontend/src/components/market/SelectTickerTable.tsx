@@ -75,7 +75,7 @@ function SelectTickerTable({
                       />
                       <span className="font-sans">{ticker.symbol}</span>
                       <div className="rounded border border-border px-1">
-                        <span className="font-mono text-primary">100X</span>
+                        <span className="font-mono text-primary">100x</span>
                       </div>
                     </div>
                   </td>

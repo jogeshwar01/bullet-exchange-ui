@@ -43,7 +43,7 @@ function MarketButton() {
               </span>
               <div className="rounded border border-border px-1 py-0.5 mr-2">
                 <div className="font-mono text-primary text-md align-middle">
-                  100X
+                  100x
                 </div>
               </div>
             </div>
