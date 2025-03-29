@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-border: rgb(41, 41, 41);
+  --color-border: rgb(56, 56, 56);
   --color-vestgrey-900: rgb(20 20 20);
   --color-vestgrey-800: rgb(26 26 26);
   --color-vestgrey-100: rgb(150 148 148);
   --color-vestgrey-50: rgb(242, 241, 240);
-  --color-primary: rgb(255 90 68);
+  --color-primary: #e5ff7e;
   --color-background: rgb(15 15 15);
   --color-green: rgb(86 245 190);
   --color-red: rgb(243 43 70);
@@ -19,6 +19,12 @@
 :root {
   background-color: var(--color-background);
   color: white;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+:root::-webkit-scrollbar {
+  display: none;
 }
 
 /* solana wallet adaptor custom styles */

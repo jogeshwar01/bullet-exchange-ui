@@ -122,7 +122,7 @@ export const TradeView = ({ market }: { market: string }) => {
     <div className="h-full min-h-[450px] max-h-[525px] bg-container-bg overflow-hidden w-full ml-2 flex flex-col">
       <div className="w-full py-2 px-3 flex items-center relative justify-between leading-[16px] flex-1 text-text-emphasis">
         <div className="w-[20%] text-lg font-semibold">
-          {ticker?.symbol ? `${ticker?.symbol?.split("-")?.[0]} / USDC` : ""}
+          {ticker?.symbol ? `${ticker?.symbol?.split("-")?.[0]} / US DOLLAR` : ""}
         </div>
         <div className="flex space-x-2">
           <div className="w-[20%] py-1 text-xs">Time</div>

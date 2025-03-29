@@ -6,18 +6,16 @@ import { ConnectWalletProvider } from "./state/Provider";
 
 function App() {
   return (
-    <>
-      <ConnectWalletProvider>
-        <TradesProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/trade/:market" element={<Trade />} />
-              <Route path="*" element={<Navigate to="/trade/ETH-PERP" />} />
-            </Routes>
-          </BrowserRouter>
-        </TradesProvider>
-      </ConnectWalletProvider>
-    </>
+    <ConnectWalletProvider>
+      <TradesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/trade/:market" element={<Trade />} />
+            <Route path="*" element={<Navigate to="/trade/SOL-PERP" />} />
+          </Routes>
+        </BrowserRouter>
+      </TradesProvider>
+    </ConnectWalletProvider>
   );
 }
 

@@ -107,12 +107,12 @@ export const Depth = ({ market }: { market: string }) => {
               }`}
             >
               <span
-                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal uppercase transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
+                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
                   activeTab === "orderbook" &&
-                  "[text-shadow:_0_0_30px_rgb(255,90,68)] border-primary text-primary"
+                  "[text-shadow:_0_0_30px_#e5ff7e] border-primary text-primary"
                 }`}
               >
-                DEPTH
+                Order Book
               </span>
               {activeTab === "orderbook" && (
                 <div className="absolute left-0 bottom-0 w-full z-10 h-[1px] bg-primary"></div>
@@ -128,12 +128,12 @@ export const Depth = ({ market }: { market: string }) => {
               }`}
             >
               <span
-                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal uppercase transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
+                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
                   activeTab === "recentTrades" &&
-                  "[text-shadow:_0_0_30px_rgb(255,90,68)] border-primary text-primary"
+                  "[text-shadow:_0_0_30px_#e5ff7e] border-primary text-primary"
                 }`}
               >
-                TRADES
+                Recent Trades
               </span>
               {activeTab === "recentTrades" && (
                 <div className="absolute left-0 bottom-0 w-full z-10 h-[1px] bg-primary"></div>

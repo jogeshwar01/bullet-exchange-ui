@@ -41,7 +41,7 @@ function MarketButton() {
                 />
               )}
               <span className="text-font text-lg font-bold">
-                {ticker?.symbol?.split("-")?.[0]} / USDC
+                {ticker?.symbol?.split("-")?.[0]}-PERP
               </span>
               <div className="rounded bg-[#271714] px-2 py-0.5">
                 <div className="font-mono text-primary text-md align-middle">

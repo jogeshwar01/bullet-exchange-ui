@@ -1,6 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import PromoteBar from "../components/PromoteBar";
 import MarketBar from "../components/MarketBar";
 import SwapInterface from "../components/SwapInterface";
 import TradeInterface from "../components/TradeInterface";
@@ -19,34 +18,32 @@ export const Trade = () => {
   }, [market, tickers]);
 
   if (!isTickerValid) {
-    return <Navigate to="/trade/ETH-PERP" />;
+    return <Navigate to="/trade/SOL-PERP" />;
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col mx-1">
       <Helmet>
         <title>{`${
           ticker?.symbol && ticker?.markPrice
-            ? ticker?.markPrice + " | " + ticker?.symbol + " | "
+            ? parseFloat(ticker?.markPrice).toFixed(2) +
+              " | " +
+              ticker?.symbol +
+              " | "
             : ""
-        } Vest`}</title>
+        } bullet X`}</title>
         <meta name="description" content="Markets Without Manipulation" />
-        <link rel="icon" href="/favicon.svg" type="image/x-icon" />
+        <link rel="icon" href="/icon.png" type="image/x-icon" />
       </Helmet>
 
       <div className="flex flex-col gap-8 lg:hidden uppercase h-[100vh] text-2xl font-mono w-full justify-center items-center">
         <div className="flex gap-2 items-center">
-          <img src="/logo.svg" alt="Vest" className="h-8 mr-2" />
-          <img src="/vest.svg" alt="Vest" className="h-6" />
+          <img src="/bullet-brandmark-logo.svg" alt="bullet" className="h-6" />
         </div>
         <div>Mobile Trading Coming soon</div>
       </div>
 
-      <div className="hidden lg:flex items-center justify-between border-b border-border px-8 py-2.5">
-        <PromoteBar />
-      </div>
-
-      <header className="hidden h-15 shrink-0 grid-cols-5 border-b border-border bg-background lg:flex">
+      <header className="hidden h-[48px] shrink-0 grid-cols-5 border-b border-border border-1 bg-background lg:flex">
         <NavBar />
       </header>
 
