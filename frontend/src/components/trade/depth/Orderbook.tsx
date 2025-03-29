@@ -1,11 +1,7 @@
 import { useContext, useEffect, useRef, useState, useMemo } from "react";
 import { TradesContext } from "../../../state/TradesProvider";
 
-interface OrderBookProps {
-  valueSymbol: string;
-}
-
-export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
+export const OrderBook = () => {
   const { ticker, bids, asks, totalBidSize, totalAskSize, trades } =
     useContext(TradesContext);
 

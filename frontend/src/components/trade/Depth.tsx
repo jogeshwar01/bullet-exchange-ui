@@ -9,7 +9,6 @@ import { DepthData } from "../../utils/ws_types";
 
 export const Depth = ({ market }: { market: string }) => {
   const [activeTab, setActiveTab] = useState("orderbook"); // 'orderbook' or 'recentTrades'
-  const [valueSymbol] = useState(market?.split("-")[0]);
   const { setTrades, setAsks, setBids, setTotalAskSize, setTotalBidSize } =
     useContext(TradesContext);
 
@@ -144,11 +143,7 @@ export const Depth = ({ market }: { market: string }) => {
         `}</style>
 
         {/* Tab Content */}
-        {activeTab === "orderbook" ? (
-          <OrderBook valueSymbol={valueSymbol} />
-        ) : (
-          <RecentTrades />
-        )}
+        {activeTab === "orderbook" ? <OrderBook /> : <RecentTrades />}
       </div>
     </div>
   );

@@ -3,11 +3,11 @@
 Bullet is a next-generation blockchain that aims to redefine the user experience of decentralized applications and on-chain trading.
 Bullet leverages the state of the art when it comes to blockchain design and zero-knowledge cryptography to enable highly performant yet verifiable applications.
 
-This repository is a frontend clone of the [Bullet Exchange](https://app.bullet.xyz/) platform, designed to replicate its user interface and functionality. The backend is a proxy to the Vest Exchange backend, while the websocket communication is handled via Vest's WebSocket API. This
+This repository is a frontend clone of the [Bullet Exchange](https://app.bullet.xyz/) platform, designed to replicate its user interface and functionality. The backend is a proxy to another Exchange backend, while the websocket communication is handled via WebSocket API. This
 
-For further details, refer to the [Vest API documentation](https://docs.vest.exchange/getting-started/vest-api#get-klines) and [Bullet API documentation](https://docs.bullet.xyz/).
+For further details, refer to the [Bullet API documentation](https://docs.bullet.xyz/).
 
-> **Note:** This project is for frontend design and learning purposes only. It makes read-only API calls to the Exchange backend, and no actual trading occurs here. The Vest Exchange and Bullet Exchange platforms holds the copyright to all associated assets and functionality.
+> **Note:** This project is for frontend design and learning purposes only. It makes read-only API calls to the Exchange backend, and no actual trading occurs here. The Bullet Exchange platforms holds the copyright to all associated assets and functionality.
 
 ## User Interface
 
@@ -40,7 +40,7 @@ The WebSocket responses are Brotli compressed, and the data is decompressed befo
 
 ## Architecture
 
-1. The frontend replicates the Vest Exchange UI design.
+1. The frontend replicates the Bullet Exchange UI design.
 2. The candlestick chart is rendered for markets, utilizing both REST and WebSocket APIs to fetch and stream candlestick data in real time.
 
 3. **Other Features:**

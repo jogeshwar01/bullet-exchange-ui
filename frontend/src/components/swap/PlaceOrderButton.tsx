@@ -2,11 +2,7 @@
 import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-interface PlaceOrderButtonProps {
-  onClick: () => void;
-}
-
-const PlaceOrderButton: React.FC<PlaceOrderButtonProps> = ({ onClick }) => {
+const PlaceOrderButton = () => {
   const { publicKey, disconnect } = useWallet();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

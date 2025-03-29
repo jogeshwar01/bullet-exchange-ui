@@ -4,7 +4,7 @@ import OrderTypeBar from "./swap/OrderTypeBar";
 import SwapForm from "./swap/SwapForm";
 import SwapMarket from "./swap/SwapMarket";
 
-const SwapInterface: React.FC<{ market: string }> = ({ market }) => {
+const SwapInterface = () => {
   const [orderType, setOrderType] = useState<OrderType>(OrderType.BUY);
 
   return (
@@ -12,7 +12,7 @@ const SwapInterface: React.FC<{ market: string }> = ({ market }) => {
       <div className="mx-2">
         <SwapMarket />
         <OrderTypeBar orderType={orderType} setOrderType={setOrderType} />
-        <SwapForm market={market} />
+        <SwapForm />
       </div>
     </div>
   );

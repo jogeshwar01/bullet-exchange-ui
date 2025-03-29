@@ -3,7 +3,7 @@ import PlaceOrderButton from "./PlaceOrderButton";
 import { useContext } from "react";
 import { TradesContext } from "../../state/TradesProvider";
 
-const SwapForm: React.FC<{ market: string }> = ({ market }) => {
+const SwapForm = () => {
   const { ticker } = useContext(TradesContext);
 
   const infoSections = [
@@ -19,10 +19,6 @@ const SwapForm: React.FC<{ market: string }> = ({ market }) => {
   ];
 
   const checkboxes = ["Reduce Only", "TP/SL"];
-
-  const handlePlaceOrder = () => {
-    // Place order logic can go here
-  };
 
   return (
     <form className="relative flex-1">
@@ -143,7 +139,7 @@ const SwapForm: React.FC<{ market: string }> = ({ market }) => {
               </div>
 
               {/* Submit Button */}
-              <PlaceOrderButton onClick={handlePlaceOrder} />
+              <PlaceOrderButton />
 
               {/* Account Health */}
               <div className="py-3 border-b border-border font-semibold">

@@ -54,7 +54,7 @@ export const Trade = () => {
                 <TradeInterface market={market as string} />
               </div>
               <div className="flex w-full max-w-sm flex-col border-l border-border bg-background lg:max-w-xs">
-                <SwapInterface market={market as string} />
+                <SwapInterface />
               </div>
             </div>
           </div>
