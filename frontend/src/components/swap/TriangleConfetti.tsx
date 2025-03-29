@@ -4,7 +4,7 @@ import Confetti from "react-confetti";
 const ConfettiWithTriangles: React.FC = () => {
   return (
     <Confetti
-      colors={["rgb(86,245,190)"]}
+      colors={["#42C78D"]}
       tweenDuration={1000}
       numberOfPieces={400}
       gravity={0.2}

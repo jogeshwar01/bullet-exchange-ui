@@ -146,7 +146,7 @@ export const TradeView = ({ market }: { market: string }) => {
         </div>
       </div>
 
-      <div className="h-full">
+      <div className="h-full m-2">
         <div ref={chartRef} className="w-full h-full"></div>
       </div>
     </div>

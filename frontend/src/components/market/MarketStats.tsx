@@ -59,7 +59,7 @@ function MarketStats() {
               </div>
             )}
           </div>
-          <div className="flex flex-1 w-fit items-center justify-start font-mono text-sm capitalize text-vestgrey-100 border-b-2 border-dashed border-blue-900">
+          <div className="flex flex-1 w-fit items-center justify-start font-mono text-md capitalize text-vestgrey-100 border-b-2 border-dashed border-blue-900">
             {stat.label}
           </div>
         </div>

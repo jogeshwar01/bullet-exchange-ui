@@ -14,7 +14,6 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
 
   const [spread, setSpread] = useState<number>(0);
   const [spreadPercentage, setSpreadPercentage] = useState<number>(0);
-  const [flashBidsAsk, setFlashBidsAsks] = useState<boolean>(false);
 
   const calculateCumulativeWidth = (
     cumulativeSize: number,
@@ -44,13 +43,6 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
     }
   }, [highestBid, lowestAsk]);
 
-  // Detect changes in bids or asks to trigger flash effect
-  useEffect(() => {
-    setFlashBidsAsks(true);
-    const timeout = setTimeout(() => setFlashBidsAsks(false), 100); // Flash for 200ms
-    return () => clearTimeout(timeout);
-  }, [asks, bids]);
-
   // Cumulative calculation for bids and asks
   let cumulativeBidSize = 0;
   let cumulativeAskSize = 0;
@@ -58,20 +50,22 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
   return (
     <div className="h-full">
       {/* Order Book */}
-      <div className="relative h-full bg-background">
-        <div className="flex flex-col h-full text-white fadein-floating-element bg-background xs:min-h-[25vh] md:min-h-0">
-          <div className="flex justify-between text-xs px-2 py-1 text-vestgrey-100">
-            <div className="font-[300] text-[12px] text-center">Price</div>
-            <div className="font-[300] text-[12px] ml-8">
-              Size ({ticker?.symbol?.split("-")?.[0]})
+      <div className="relative h-full bg-background text-vestgrey-100">
+        <div className="flex flex-col h-full  fadein-floating-element bg-background xs:min-h-[25vh] md:min-h-0">
+          <div className="flex justify-between text-sm px-2 py-1 mb-1 text-vestgrey-100">
+            <div className="font-semibold text-[12px] text-center border-b-2 border-dashed border-blue-900 w-fit">
+              Price
             </div>
-            <div className="font-[300] text-[12px] text-left">
-              Total ({ticker?.symbol?.split("-")?.[0]})
+            <div className="font-semibold text-[12px] border-b-2 border-dashed border-blue-900 w-fit">
+              Total (SOL)
+            </div>
+            <div className="font-semibold text-[12px] text-left border-b-2 border-dashed border-blue-900 w-fit">
+              Total ($)
             </div>
           </div>
 
           <div className="flex-1 flex flex-col relative overflow-hidden">
-            {/* Asks Scrollable Area (now at top and green) */}
+            {/* Asks Scrollable Area (now at top and red) */}
             <div
               ref={asksRef}
               className="flex-1 overflow-y-auto flex flex-col-reverse"
@@ -81,34 +75,30 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
                 msOverflowStyle: "none",
               }}
             >
-              {asks?.slice(0, 10)?.map((order, index) => {
+              {asks?.slice(0, 13)?.map((order, index) => {
                 const size = parseFloat(order[1]);
                 cumulativeAskSize += size; // Keep track of cumulative size
 
                 return (
-                  <div key={index} className="relative w-full my-[2px]">
+                  <div key={index} className="relative w-full">
                     <div className="w-full h-5 flex items-center relative box-border text-xs leading-7 justify-between font-display mr-0">
                       <div className="flex flex-row mx-2 justify-between font-mono w-full">
-                        <div className="z-10 text-xs leading-6 text-green">
-                          {parseFloat(order[0]).toFixed(3)}
+                        <div className="z-10 text-xs leading-6 text-red">
+                          {parseFloat(order[0]).toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 text-white">
-                          {valueSymbol !== "USDC"
-                            ? order[1]
-                            : (
-                                parseFloat(order[1]) * parseFloat(order[0])
-                              ).toFixed(3)}
+                        <div className="z-10 text-xs leading-6 ">
+                          {cumulativeAskSize.toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 text-white">
-                          {cumulativeAskSize.toFixed(3)}
+                        <div className="z-10 text-xs leading-6 ">
+                          {(cumulativeAskSize * parseFloat(order[0])).toFixed(
+                            0
+                          )}
                         </div>
                       </div>
                       {/* Cumulative background */}
                       <div className="absolute opacity-10 w-full h-full flex justify-start">
                         <div
-                          className={`h-full brightness-80 ${
-                            flashBidsAsk ? "bg-green-200" : "bg-green"
-                          }`}
+                          className="h-full brightness-80 bg-red"
                           style={{
                             width: calculateCumulativeWidth(
                               cumulativeAskSize,
@@ -125,8 +115,8 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
             </div>
 
             {/* Orderbook Spread */}
-            <div className="relative w-full px-2 inline-flex font-mono justify-center gap-4 items-center py-1 min-h-[26px] bg-vestgrey-800 text-white z-20">
-              <div className="font-[300] text-[13px] leading-[16px] text-white">
+            <div className="relative w-full px-2 inline-flex font-mono justify-center gap-4 items-center py-1 min-h-[26px] bg-vestgrey-800  z-20">
+              <div className="font-[300] text-[13px] leading-[16px] ">
                 Spread
               </div>
               <div className="text-xs">
@@ -137,7 +127,7 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
               </div>
             </div>
 
-            {/* Bids Scrollable Area (now at bottom and red) */}
+            {/* Bids Scrollable Area (now at bottom and green) */}
             <div
               ref={bidsRef}
               className="flex-1 overflow-y-auto flex flex-col"
@@ -147,34 +137,30 @@ export const OrderBook = ({ valueSymbol }: OrderBookProps) => {
                 msOverflowStyle: "none",
               }}
             >
-              {bids?.slice(0, 10)?.map((order, index) => {
+              {bids?.slice(0, 13)?.map((order, index) => {
                 const size = parseFloat(order[1]);
                 cumulativeBidSize += size; // Keep track of cumulative size
 
                 return (
-                  <div key={index} className="relative w-full my-[2px]">
+                  <div key={index} className="relative w-full">
                     <div className="w-full h-5 flex items-center relative box-border text-xs leading-7 justify-between font-display ml-0">
                       <div className="flex flex-row mx-2 justify-between font-mono w-full">
-                        <div className="z-10 text-xs leading-6 text-red">
-                          {parseFloat(order[0]).toFixed(3)}
+                        <div className="z-10 text-xs leading-6 text-green">
+                          {parseFloat(order[0]).toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 text-white">
-                          {valueSymbol !== "USDC"
-                            ? order[1]
-                            : (
-                                parseFloat(order[1]) * parseFloat(order[0])
-                              ).toFixed(3)}
+                        <div className="z-10 text-xs leading-6 ">
+                          {cumulativeBidSize.toFixed(2)}
                         </div>
-                        <div className="z-10 text-xs leading-6 text-white">
-                          {cumulativeBidSize.toFixed(3)}
+                        <div className="z-10 text-xs leading-6 ">
+                          {(cumulativeBidSize * parseFloat(order[0])).toFixed(
+                            0
+                          )}
                         </div>
                       </div>
                       {/* Cumulative background */}
                       <div className="absolute opacity-10 w-full h-full flex justify-start">
                         <div
-                          className={`h-full brightness-80 ${
-                            flashBidsAsk ? "bg-red-300" : "bg-red"
-                          }`}
+                          className="h-full brightness-80 bg-green"
                           style={{
                             width: calculateCumulativeWidth(
                               cumulativeBidSize,

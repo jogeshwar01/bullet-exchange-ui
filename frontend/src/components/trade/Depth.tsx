@@ -9,14 +9,14 @@ import { DepthData } from "../../utils/ws_types";
 
 export const Depth = ({ market }: { market: string }) => {
   const [activeTab, setActiveTab] = useState("orderbook"); // 'orderbook' or 'recentTrades'
-  const [valueSymbol, setValueSymbol] = useState(market?.split("-")[0]);
+  const [valueSymbol] = useState(market?.split("-")[0]);
   const { setTrades, setAsks, setBids, setTotalAskSize, setTotalBidSize } =
     useContext(TradesContext);
 
   useEffect(() => {
     getTrades(market).then((trades) => {
       trades = trades.filter((trade) => parseFloat(trade.qty) !== 0);
-      trades = trades.slice(0, 50);
+      trades = trades.slice(0, 100);
       setTrades(trades);
     });
 
@@ -88,10 +88,6 @@ export const Depth = ({ market }: { market: string }) => {
     };
   }, [market, setAsks, setBids, setTotalAskSize, setTotalBidSize, setTrades]);
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValueSymbol(e.target.value);
-  };
-
   return (
     <div className="flex w-full max-w-[300px] flex-col border-l border-border">
       <div className="flex flex-col">
@@ -100,59 +96,42 @@ export const Depth = ({ market }: { market: string }) => {
           <div className="flex border-b border-border">
             <div
               onClick={() => setActiveTab("orderbook")}
-              className={`py-2 px-3 flex items-center relative hover:cursor-pointer hover:bg-container-bg-hover justify-center leading-[16px] flex-1 ${
+              className={`py-1 px-1 flex items-center relative hover:cursor-pointer hover:bg-container-bg-hover justify-center leading-[16px] flex-1 ${
                 activeTab === "orderbook"
                   ? "text-text-emphasis bg-container-bg-selected"
                   : "text-text-label"
               }`}
             >
               <span
-                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
-                  activeTab === "orderbook" &&
-                  "[text-shadow:_0_0_30px_#e5ff7e] border-primary text-primary"
+                className={`flex items-center justify-center overflow-hidden text-vestgrey-100 whitespace-nowrap px-8 py-1 font-mono text-md font-semibold transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
+                  activeTab === "orderbook" && "border-primary !text-white"
                 }`}
               >
                 Order Book
               </span>
               {activeTab === "orderbook" && (
-                <div className="absolute left-0 bottom-0 w-full z-10 h-[1px] bg-primary"></div>
+                <div className="absolute left-0 bottom-0 w-full z-10 h-[2px] bg-primary"></div>
               )}
             </div>
 
             <div
               onClick={() => setActiveTab("recentTrades")}
-              className={`py-2 px-3 flex items-center relative hover:cursor-pointer hover:bg-container-bg-hover justify-center leading-[16px] flex-1 ${
+              className={`py-1 px-1 flex items-center relative hover:cursor-pointer hover:bg-container-bg-hover justify-center leading-[16px] flex-1 ${
                 activeTab === "recentTrades"
                   ? "text-text-emphasis bg-container-bg-selected"
                   : "text-text-label"
               }`}
             >
               <span
-                className={`flex items-center justify-center overflow-hidden whitespace-nowrap px-8 py-1 font-mono text-sm font-normal transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
-                  activeTab === "recentTrades" &&
-                  "[text-shadow:_0_0_30px_#e5ff7e] border-primary text-primary"
+                className={`flex items-center justify-center overflow-hidden whitespace-nowrap text-vestgrey-100 px-8 py-1 font-mono text-md font-semibold transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none" ${
+                  activeTab === "recentTrades" && "border-primary !text-white"
                 }`}
               >
                 Recent Trades
               </span>
               {activeTab === "recentTrades" && (
-                <div className="absolute left-0 bottom-0 w-full z-10 h-[1px] bg-primary"></div>
+                <div className="absolute left-0 bottom-0 w-full z-10 h-[2px] bg-primary"></div>
               )}
-            </div>
-            <div className="flex items-center justify-center mr-2 focus:outline-none">
-              <select
-                className="bg-background text-sm focus:outline-none"
-                value={valueSymbol}
-                onChange={handleSelectChange}
-              >
-                <option
-                  className="hover:bg-vestgrey-900 focus:bg-vestgrey-900"
-                  value={market?.split("-")[0]}
-                >
-                  {market?.split("-")[0]}
-                </option>
-                <option value="USDC">USDC</option>
-              </select>
             </div>
           </div>
         </div>
